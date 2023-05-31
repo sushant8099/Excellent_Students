@@ -13,8 +13,8 @@ using namespace std;
 
 class Student{
 public:
-	Student(string &first, string &last, float gpa, int id):
-		first_{first}, last_{last}, gpa_{gpa}, id_{id} {}
+	Student(string first, string last, float gpa, int id)
+		:first_(first), last_(last), gpa_(gpa), id_(id) {}	
 
 		string full_name() const {
 			return first_ + " " + last_;
@@ -41,18 +41,18 @@ private:
 
 /**
  * Takes a vector of Student objects, and returns a new vector
- * with all Students whose GPA is < 1.0.
+ * with all Students whose GPA is > 3.5.
  */
-vector<Student> find_failing_students(const vector<Student> &students) {
-	vector<Student> failing_students;
+vector<Student> find_excellent_students(const vector<Student> &students) {
+	vector<Student> excellent_students;
 	// Iterates through the students vector, appending each student whose gpa is
-	// less than 1.0 to the failing_students vector.
-	for (const auto &student: students){
-			if (student.gpa() < 1.0){
-				failing_students.push_back(student);
+	// more than 3.5 to the excellent_students vector.
+	for (const auto& student : students){
+			if (student.gpa() > 3.5){
+				excellent_students.push_back(student);
 			}
 	}
-	return failing_students;
+	return excellent_students;
 }
 /**
  * Takes a vector of Student objects and prints them to the screen.
@@ -60,7 +60,7 @@ vector<Student> find_failing_students(const vector<Student> &students) {
 void print_students(const vector<Student> &students) {
 
 	// Iterates through the students vector, calling print_info() for each student.
-	for(const auto &student: students){
+	for(const auto& student : students){
 		student.print_info();
 	}
 }
@@ -93,17 +93,17 @@ int main() {
 	} while (repeat == 'Y' || repeat == 'y');
 	cout << endl << "All students:" << endl;
 	print_students(students);
-	cout << endl << "Failing students:";
+	cout << endl << "excellent students:";
 
 	// TODO
-	// Print a space and the word 'None' on the same line if no students are failing.
-	// Otherwise, print each failing student on a separate line.
-	vector<Student> failing_students = find_failing_students(students);
-	if(failing_students.size() == 0){
+	// Print a space and the word 'None' on the same line if no students are excellent.
+	// Otherwise, print each excellent student on a separate line.
+	vector<Student> excellent_students = find_excellent_students(students);
+	if(excellent_students.size() == 0){
 		cout << " None" << endl;
 	} else {
 		cout << endl;
-		print_students(failing_students);
+		print_students(excellent_students);
 	}
 	return 0;
 }
